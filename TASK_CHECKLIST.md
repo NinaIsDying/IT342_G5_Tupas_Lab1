@@ -1,6 +1,12 @@
 DONE:
+REACT app initialization
 
 IN-PROGRESS:
+WEB APP
+Register page
+Login page
+Dashboard/Profile page (protected)
+Logout functionality
 
 TODO:
 
@@ -10,12 +16,6 @@ POST /api/auth/login
 GET /api/user/me (protected)
 Database connection (MySQL)
 Password encryption (BCrypt)
-
-WEB APP
-Register page
-Login page
-Dashboard/Profile page (protected)
-Logout functionality
 
 Updated /docs FRS PDF (Web screenshots only)
 
