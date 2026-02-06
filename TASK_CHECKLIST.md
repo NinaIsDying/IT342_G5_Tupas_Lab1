@@ -9,13 +9,15 @@ POST /api/auth/signup
 POST /api/auth/signin
 Protected user profile
 Password encryption (BCrypt)
-
 Database connection (MySQL)
+Updated /docs FRS PDF (Web screenshots only)
 
 IN-PROGRESS:
 
 
 TODO:
 
-Updated /docs FRS PDF (Web screenshots only)
+Booking Functionality
+Venue Database
+Other webpages
 
