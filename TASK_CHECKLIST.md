@@ -1,11 +1,11 @@
 DONE:
 REACT app initialization
-
-IN-PROGRESS:
 WEB APP
 Register page
 Login page
 Dashboard/Profile page (protected)
+
+IN-PROGRESS:
 Logout functionality
 
 TODO:

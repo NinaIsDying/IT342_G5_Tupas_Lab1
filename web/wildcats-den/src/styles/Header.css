@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.profile-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--red);
+  transition: transform 0.2s ease;
+}
+
+.profile-icon:hover {
+  transform: scale(1.05);
+}
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-logout {
+  padding: 8px 16px;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: #531819;
+}
+
+.header-buttons > *:not(:last-child) {
+  margin-right: 10px;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 50px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #E6E6E6;
+
+  transition: transform 0.35s ease-in-out;
+
+
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  margin: 0;
+  padding: 0;
+}
+
+.brand-name {
+  font-family: 'Montserrat', sans-serif;
+  color: #7B282A;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  color: #7B282A;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.nav-item:hover {
+  color: #5E1E20;
+  border-bottom: 2px solid #7B282A;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-signin {
+  background-color: #7B282A;
+  color: #F7F7F7;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-signin:hover {
+  background-color: #5E1E20;
+}
+
+.btn-signup {
+  background-color: #F7F7F7;
+  color: #7B282A;
+  border: 2px solid #7B282A;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-signup:hover {
+  background-color: #7B282A;
+  color: #F7F7F7;
+}
+
+/* For Logout */
+
+.btn-logout {
+  background-color: #7B282A;
+  color: #F7F7F7;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.1s ease;
+}
+
+.btn-logout:hover {
+  background-color: #5E1E20;
+}
+

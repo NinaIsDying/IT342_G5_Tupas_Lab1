@@ -1,0 +1,90 @@
+:root {
+  --red: #7B282A;
+  --yellow: #E7C51D;
+  --white: #F7F7F7;
+  --gray: #E6E6E6;
+}
+
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-btn {
+  background-color: var(--red);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #531819;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: var(--card-shadow);
+  color: var(--red);
+}
+
+.profile-top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.profile-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 auto 12px auto; 
+  border: 2px solid var(--gray);
+}
+
+/* Actual Image */
+.profile-photo img {
+  width: 98px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 20px;
+  margin: 0;
+  color: var(--red);
+}
+
+.profile-sub {
+  margin: 4px 0 0 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.profile-section {
+  margin-top: 18px;
+}
+
+.section-label {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--red);
+}
+
+.section-value {
+  margin-top: 6px;
+  color: #444;
+  font-size: 0.95rem;
+}

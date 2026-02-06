@@ -1,0 +1,115 @@
+.guide-page {
+  width: 80%;
+  margin: 60px auto;
+}
+
+.guide-title {
+  color: var(--red);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* MAIN CARD */
+.guide-step {
+  background: white;
+  padding: 26px 28px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.guide-step:hover {
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* HEADER */
+.step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+/* ICON */
+.step-icon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  filter: brightness(0) saturate(100%) invert(18%) sepia(38%) saturate(1500%)
+          hue-rotate(330deg) brightness(90%);
+}
+
+/* TEXT BLOCK */
+.step-text h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--red);
+}
+
+.step-short {
+  margin: 6px 0 0;
+  color: #555;
+}
+
+/* EXPANDING WRAPPER (smooth animation) */
+.step-expand-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+  padding-top: 0;
+}
+
+/* When the step is opened */
+.step-expand-wrapper.open {
+  max-height: 500px;
+  padding-top: 16px;
+}
+
+/* Inner content animation */
+.step-expanded {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.step-expand-wrapper.open .step-expanded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LIST */
+.step-list {
+  margin-left: 88px;
+  padding-left: 18px;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.step-list li {
+  margin-bottom: 6px;
+}
+
+/* BACK BUTTON */
+.back-button {
+  margin-top: 40px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--red);
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.back-button:hover {
+  background: #5e1e20;
+}

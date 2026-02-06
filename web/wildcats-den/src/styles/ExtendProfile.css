@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font-primary: 'Montserrat', sans-serif;
+}
+
+
+.extend-card {
+  flex: 1;
+  background: #742B2C;
+  color: white;
+  border-radius: 12px;
+  padding: 35px 40px;
+}
+
+.extend-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-primary);
+}
+
+.joined-text {
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.ep-edit-btn {
+  margin-top: 20px;
+  background: #E7C51D;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-primary);
+}
+
+.booking-count {
+  margin-top: 20px;
+  font-weight: 600;
+  font-family: var(--font-primary);
+}
+
+/* EDIT MODE */
+.extend-card label {
+  display: block;
+  margin-top: 25px;
+  font-weight: 600;
+  font-family: var(--font-primary);
+}
+
+.extend-card input,
+.extend-card textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--font-primary);
+}
+
+.ep-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  margin-top: 25px;
+}
+
+.ep-save-btn {
+  background: white;
+  color: #742B2C;
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: none;
+  font-family: var(--font-primary);
+  cursor: pointer;
+}
+
+.ep-save-btn:hover {
+  background: #f0f0f0;
+}
+
+.ep-cancel-btn {
+  background: transparent;
+  border: none;
+  color: #E7C51D;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  cursor: pointer;
+}
+
+.note {
+  padding-top: 25px;
+  font-family: var(--font-primary);
+}
+
+.edit-photo-section {
+  margin-bottom: 20px;
+}
+
+.edit-photo-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.edit-photo-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gray);
+}
+
+.edit-photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.edit-photo-upload {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.photo-file-name {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 4px 0 0 0;
+}

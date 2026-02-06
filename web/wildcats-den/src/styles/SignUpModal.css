@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root{
+  --red:#7B282A;
+  --yellow:#E7C51D;
+  --white:#F7F7F7;
+  --light-gray:#E6E6E6;
+  --muted:#6b7280;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:'Montserrat', sans-serif;
+}
+
+/* OVERLAY */
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:1.25rem;
+  z-index:2000;
+}
+
+/* MODAL CARD */
+.modal-card{
+  width:100%;
+  max-width:560px;
+  background:#FFFFFF;
+  border-radius:14px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  padding:2rem;
+  position:relative;
+  z-index:3000;
+
+  max-height:85vh;
+  overflow-y:auto;
+  padding-right:16px;
+  scrollbar-gutter:stable both-edges;
+}
+
+/* Scrollbars */
+.modal-card::-webkit-scrollbar{
+  width:8px;
+}
+.modal-card::-webkit-scrollbar-thumb{
+  background:#d1d1d1;
+  border-radius:10px;
+  border:2px solid var(--white);
+}
+
+/* CLOSE BUTTON */
+.close-btn{
+  position:absolute;
+  right:1rem;
+  top:1rem;
+  background:transparent;
+  border:none;
+  font-size:1.2rem;
+  cursor:pointer;
+  color:var(--red) !important;
+}
+
+.signup-title {
+  font-size: 28px !important;
+  color: var(--red) !important;
+  padding-bottom: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* FORM */
+.modal-form{
+  display:flex;
+  flex-direction:column;
+  gap:0.9rem;
+}
+
+/* LABELS */
+.label{
+  font-size:0.78rem;
+  color:#6b6b6b;
+  margin:0 0 0.35rem 0;
+}
+
+/* 2 COLUMN FIX */
+.row-two{
+  display:flex;
+  gap:1rem;
+}
+
+.form-group{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* INPUT PILL */
+.input-pill{
+  width:100%;
+  background:var(--light-gray);
+  border:none;
+  padding:0.9rem 1rem;
+  border-radius:999px;
+  outline:none;
+  font-size:0.95rem;
+  color:#111827;
+  box-shadow:inset 0 0 0 1px transparent;
+  transition:box-shadow .15s, transform .08s;
+}
+
+.input-pill:focus{
+  box-shadow:inset 0 0 0 2px rgba(123,40,42,0.18);
+  transform:translateY(-1px);
+}
+
+/* DROPDOWN ARROW FIX */
+.input-pill[name="userType"]{
+  appearance:none;
+  padding-right:2.5rem;
+  background-image:url("data:image/svg+xml;utf8,<svg fill='%236b6b6b' height='20' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M5 8l5 5 5-5z'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 1rem center;
+  background-size:14px;
+}
+
+/* BUTTON */
+.btn-continue{
+  background:var(--red);
+  color:var(--white);
+  border:none;
+  padding:0.85rem 2.2rem;
+  border-radius:999px;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:0.4rem;
+}
+
+.btn-continue:hover{
+  background:#5e1e20;
+}
+
+/* DIVIDER */
+.divider{
+  margin:1.25rem 0 0.8rem 0;
+  border:none;
+  border-top:1px solid rgba(0,0,0,0.06);
+}
+
+/* SWITCH LINK */
+.switch-row{
+  text-align:center;
+  margin-top:0.5rem;
+}
+
+.link-button{
+  background:none;
+  border:none;
+  color:var(--red);
+  font-weight:700;
+  cursor:pointer;
+  text-decoration:underline;
+}
+
+
+.signup-title {
+  font-size: 28px !important;
+  color: var(--red) !important;
+  padding-bottom: 20px;
+  font-weight: 700;
+  margin: 0;
+  background-color: transparent;
+}
+
+/* field errors  */
+
+.form-field-group {
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.form-field-group .label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-pill.input-error {
+  border-color: #ff4444 !important;
+  background-color: #fff8f8 !important;
+}
+
+.input-pill.input-error:focus {
+  outline-color: #ff4444 !important;
+  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.1) !important;
+}
+
+.field-error-text {
+  margin-top: 5px;
+  background:#ffe5e5;
+  color:#b30000;
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:0.85rem;
+  margin-bottom:0.8rem;
+  border-left:4px solid #b30000;
+}
+
+.general-error {
+  margin-top: 5px;
+  background-color: #fff8f8;
+  border: 1px solid #ffdddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.error-text {
+  background:#ffe5e5;
+  color:#b30000;
+  padding:10px 14px;
+  border-radius:8px;
+  font-size:0.85rem;
+  margin-bottom:0.8rem;
+  border-left:4px solid #b30000;
+}
+
