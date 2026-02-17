@@ -10,9 +10,15 @@ POST /api/auth/signin
 Protected user profile
 Password encryption (BCrypt)
 Database connection (MySQL)
-Updated /docs FRS PDF (Web screenshots only)
+Updated /docs FRS PDF (Web and Mobile)
 
 IN-PROGRESS:
+
+Mobile Login Page
+Mobile Register Page
+Mobile Dashboard/Profile page (protected)
+Mobile Logout functionality
+Mobile database connection
 
 
 TODO:
