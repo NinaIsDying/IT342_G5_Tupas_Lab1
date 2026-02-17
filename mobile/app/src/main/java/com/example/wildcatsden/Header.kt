@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 
 class Header @JvmOverloads constructor(
     context: Context,
@@ -23,16 +24,13 @@ class Header @JvmOverloads constructor(
     private lateinit var btnSignUp: Button
     private lateinit var btnLogout: Button
     private lateinit var btnProfile: ImageView
-    // Change these to LinearLayout to match XML
     private lateinit var layoutAuthButtons: LinearLayout
     private lateinit var layoutUserButtons: LinearLayout
     private lateinit var tvBrandName: TextView
-    // Add this for the logo container if needed
     private lateinit var logoImage: ImageView
 
     private var isLoggedIn = false
     private var isCustodian = false
-    private var profilePhotoUrl: String? = null
 
     interface HeaderListener {
         fun onHomeClick()
@@ -53,7 +51,6 @@ class Header @JvmOverloads constructor(
     }
 
     private fun initViews() {
-        // Find all views
         btnHome = findViewById(R.id.btnHome)
         btnVenues = findViewById(R.id.btnVenues)
         btnFaq = findViewById(R.id.btnFaq)
@@ -66,12 +63,10 @@ class Header @JvmOverloads constructor(
         tvBrandName = findViewById(R.id.tvBrandName)
         logoImage = findViewById(R.id.logoImage)
 
-        // Set click listener on the brand name
         tvBrandName.setOnClickListener {
             listener?.onHomeClick()
         }
 
-        // Also make logo clickable
         logoImage.setOnClickListener {
             listener?.onHomeClick()
         }
@@ -81,10 +76,35 @@ class Header @JvmOverloads constructor(
         btnHome.setOnClickListener { listener?.onHomeClick() }
         btnVenues.setOnClickListener { listener?.onVenuesClick() }
         btnFaq.setOnClickListener { listener?.onFaqClick() }
-        btnSignIn.setOnClickListener { listener?.onSignInClick() }
-        btnSignUp.setOnClickListener { listener?.onSignUpClick() }
+
+        btnSignIn.setOnClickListener {
+            showSignInModal()
+            listener?.onSignInClick()
+        }
+
+        btnSignUp.setOnClickListener {
+            showSignUpModal()
+            listener?.onSignUpClick()
+        }
+
         btnLogout.setOnClickListener { listener?.onLogoutClick() }
         btnProfile.setOnClickListener { listener?.onProfileClick() }
+    }
+
+    private fun showSignInModal() {
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.let { fragmentManager ->
+            val signInModal = SignInModal()
+            signInModal.show(fragmentManager, SignInModal.TAG)
+        }
+    }
+
+    private fun showSignUpModal() {
+        val activity = context as? FragmentActivity
+        activity?.supportFragmentManager?.let { fragmentManager ->
+            val signUpModal = SignUpModal()
+            signUpModal.show(fragmentManager, SignUpModal.TAG)
+        }
     }
 
     fun updateLoginState(loggedIn: Boolean, isCustodianUser: Boolean = false) {
@@ -100,8 +120,6 @@ class Header @JvmOverloads constructor(
     }
 
     fun updateProfilePhoto(photoUrl: String?) {
-        profilePhotoUrl = photoUrl
         // Load image using Glide or Coil when available
-        // Glide.with(context).load(photoUrl).circleCrop().into(btnProfile)
     }
 }

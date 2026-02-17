@@ -32,7 +32,7 @@
                 android:id="@+id/tvBrandName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wildcat's Den"
+                android:text="Wildcat's DEN"
                 android:textColor="#7B282A"
                 android:textSize="20sp"
                 android:textStyle="bold"

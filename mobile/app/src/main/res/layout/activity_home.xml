@@ -28,8 +28,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- ALL YOUR EXISTING CONTENT HERE -->
-            <!-- HERO SECTION -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="300dp">
@@ -37,9 +35,15 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha="0.7"
+                    android:alpha="0.6"
                     android:scaleType="centerCrop"
                     android:src="@drawable/gle" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.4"
+                    android:background="@drawable/overlay_blur" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,13 +197,14 @@
                         android:layout_marginHorizontal="4dp"
                         android:clickable="true"
                         android:focusable="true"
+                        android:layout_marginBottom="10dp"
                         android:foreground="?android:attr/selectableItemBackground"
                         app:cardCornerRadius="12dp"
                         app:cardElevation="4dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="160dp"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
@@ -243,7 +248,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="160dp"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
@@ -287,7 +292,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="160dp"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:padding="16dp">
@@ -322,7 +327,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:backgroundTint="#7B282A"
                     android:text="View All Guide"
                     android:textColor="@android:color/white"
@@ -414,7 +419,7 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:radius="10dp"
                     android:scaleType="centerCrop"

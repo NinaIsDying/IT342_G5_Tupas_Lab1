@@ -11,11 +11,10 @@ Protected user profile
 Password encryption (BCrypt)
 Database connection (MySQL)
 Updated /docs FRS PDF (Web and Mobile)
-
-IN-PROGRESS:
-
 Mobile Login Page
 Mobile Register Page
+
+IN-PROGRESS:
 Mobile Dashboard/Profile page (protected)
 Mobile Logout functionality
 Mobile database connection

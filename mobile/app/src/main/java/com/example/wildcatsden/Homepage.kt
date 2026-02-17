@@ -3,17 +3,16 @@ package com.example.wildcatsden
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView  // Add this import
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.cardview.widget.CardView
 
-class HomePage : AppCompatActivity() {
+class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.SignUpListener {
 
     private lateinit var headerView: Header
     private lateinit var footerView: FooterView
@@ -21,11 +20,8 @@ class HomePage : AppCompatActivity() {
     private lateinit var btnFindVenue: Button
     private lateinit var btnViewGuide: Button
     private lateinit var btnDiscoverMore: Button
-
-    // Change these from Button to TextView
     private lateinit var btnFaq: TextView
     private lateinit var btnFindVenueDiscover: TextView
-
     private lateinit var btnBrowseVenues: CardView
     private lateinit var btnSubmitRequest: CardView
     private lateinit var btnTrackBooking: CardView
@@ -61,12 +57,8 @@ class HomePage : AppCompatActivity() {
         btnFindVenue = findViewById(R.id.btnFindVenue)
         btnViewGuide = findViewById(R.id.btnViewGuide)
         btnDiscoverMore = findViewById(R.id.btnDiscoverMore)
-
-        // These are TextViews in XML
         btnFaq = findViewById(R.id.btnFaq)
         btnFindVenueDiscover = findViewById(R.id.btnFindVenueDiscover)
-
-        // Guide cards - CardViews
         btnBrowseVenues = findViewById(R.id.btnBrowseVenues)
         btnSubmitRequest = findViewById(R.id.btnSubmitRequest)
         btnTrackBooking = findViewById(R.id.btnTrackBooking)
@@ -87,11 +79,13 @@ class HomePage : AppCompatActivity() {
             }
 
             override fun onSignInClick() {
-                Toast.makeText(this@HomePage, "Sign In clicked", Toast.LENGTH_SHORT).show()
+                // Modal is shown by Header, just log
+                Toast.makeText(this@HomePage, "Opening Sign In", Toast.LENGTH_SHORT).show()
             }
 
             override fun onSignUpClick() {
-                Toast.makeText(this@HomePage, "Sign Up clicked", Toast.LENGTH_SHORT).show()
+                // Modal is shown by Header, just log
+                Toast.makeText(this@HomePage, "Opening Sign Up", Toast.LENGTH_SHORT).show()
             }
 
             override fun onLogoutClick() {
@@ -118,7 +112,6 @@ class HomePage : AppCompatActivity() {
             Toast.makeText(this, "Discover More clicked", Toast.LENGTH_SHORT).show()
         }
 
-        // These are now TextViews
         btnFaq.setOnClickListener {
             Toast.makeText(this, "FAQ clicked", Toast.LENGTH_SHORT).show()
         }
@@ -169,8 +162,38 @@ class HomePage : AppCompatActivity() {
             R.drawable.event4
         )
 
-        eventsRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        eventsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val eventsAdapter = EventsAdapter(eventImages)
         eventsRecyclerView.adapter = eventsAdapter
+    }
+
+    // SignInListener callbacks
+    override fun onSignInSuccess() {
+        headerView.updateLoginState(true)
+        Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onSignUpClick() {
+        // Open Sign Up modal
+        val signUpModal = SignUpModal()
+        signUpModal.show(supportFragmentManager, SignUpModal.TAG)
+    }
+
+    // SignUpListener callbacks
+    override fun onSignUpSuccess() {
+        Toast.makeText(this, "Account created! Please sign in.", Toast.LENGTH_SHORT).show()
+        // Open Sign In modal
+        val signInModal = SignInModal()
+        signInModal.show(supportFragmentManager, SignInModal.TAG)
+    }
+
+    override fun onSignInClick() {
+        // Open Sign In modal
+        val signInModal = SignInModal()
+        signInModal.show(supportFragmentManager, SignInModal.TAG)
+    }
+
+    override fun onModalDismiss() {
+        // Optional: Handle modal dismiss
     }
 }

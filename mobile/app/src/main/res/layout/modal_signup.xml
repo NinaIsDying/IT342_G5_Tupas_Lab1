@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/modal_background"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Close Button -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="✕"
+                android:textColor="#7B282A"
+                android:textSize="24sp"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:id="@+id/btnClose"/>
+        </FrameLayout>
+
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="#7B282A"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Error Message -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFE5E5"
+            android:textColor="#B30000"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp"/>
+
+        <!-- First Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Name *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_input_background"
+            android:padding="16dp"
+            android:hint="Enter your first name"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Last Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Name *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_input_background"
+            android:padding="16dp"
+            android:hint="Enter your last name"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_input_background"
+            android:padding="16dp"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Password -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_input_background"
+            android:padding="16dp"
+            android:hint="Create a password (min. 8 characters)"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Confirm Password -->
+        <TextView
+            android:layout_width="wrap_content"
+            :layout_height="wrap_content"
+            android:text="Confirm Password *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <EditText
+            android:id="@+id/etConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pill_input_background"
+            android:padding="16dp"
+            android:hint="Confirm your password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Role Selection -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Role *"
+            android:textColor="#6B6B6B"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerUserType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner_background"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Student Fields -->
+        <LinearLayout
+            android:id="@+id/layoutStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Course *"
+                android:textColor="#6B6B6B"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_input_background"
+                android:padding="16dp"
+                android:hint="e.g., BSIT"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Organization *"
+                android:textColor="#6B6B6B"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etOrganization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_input_background"
+                android:padding="16dp"
+                android:hint="e.g., CCS"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+
+        <!-- Coordinator Fields -->
+        <LinearLayout
+            android:id="@+id/layoutCoordinator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Affiliation *"
+                android:textColor="#6B6B6B"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etAffiliation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_input_background"
+                android:padding="16dp"
+                android:hint="Enter organization"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+
+        <!-- Faculty Fields -->
+        <LinearLayout
+            android:id="@+id/layoutFaculty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Department *"
+                android:textColor="#6B6B6B"
+                android:textSize="12sp"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pill_input_background"
+                android:padding="16dp"
+                android:hint="Enter department"
+                android:layout_marginBottom="16dp"/>
+        </LinearLayout>
+
+        <!-- Create Account Button -->
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:backgroundTint="#7B282A"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"
+            android:layout_marginVertical="16dp"/>
+
+        <!-- Sign In Link -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? "
+                android:textColor="#4B5563"/>
+
+            <TextView
+                android:id="@+id/tvSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign in here"
+                android:textColor="#7B282A"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
