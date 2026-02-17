@@ -11,6 +11,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.cardview.widget.CardView
+import com.example.wildcatsden.api.UserSession
+import org.json.JSONObject
 
 class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.SignUpListener {
 
@@ -31,12 +33,20 @@ class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.Si
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        // Initialize UserSession
+        UserSession.init(this)
+
         setupWindowInsets()
         initViews()
         setupHeaderListener()
         setupClickListeners()
         setupVenueCarousel()
         setupEventsGrid()
+
+        // Check if user is already logged in
+        if (UserSession.isLoggedIn()) {
+            headerView.updateLoginState(true, UserSession.isCustodian())
+        }
 
         Toast.makeText(this, "HomePage Loaded", Toast.LENGTH_SHORT).show()
     }
@@ -79,22 +89,25 @@ class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.Si
             }
 
             override fun onSignInClick() {
-                // Modal is shown by Header, just log
-                Toast.makeText(this@HomePage, "Opening Sign In", Toast.LENGTH_SHORT).show()
+                val signInModal = SignInModal()
+                signInModal.show(supportFragmentManager, SignInModal.TAG)
             }
 
             override fun onSignUpClick() {
-                // Modal is shown by Header, just log
-                Toast.makeText(this@HomePage, "Opening Sign Up", Toast.LENGTH_SHORT).show()
+                val signUpModal = SignUpModal()
+                signUpModal.show(supportFragmentManager, SignUpModal.TAG)
             }
 
             override fun onLogoutClick() {
-                Toast.makeText(this@HomePage, "Logout clicked", Toast.LENGTH_SHORT).show()
+                UserSession.logout()
                 headerView.updateLoginState(false)
+                Toast.makeText(this@HomePage, "Logged out successfully", Toast.LENGTH_SHORT).show()
             }
 
             override fun onProfileClick() {
                 Toast.makeText(this@HomePage, "Profile clicked", Toast.LENGTH_SHORT).show()
+                // Navigate to profile page
+                // startActivity(Intent(this@HomePage, ProfileActivity::class.java))
             }
         }
     }
@@ -168,13 +181,18 @@ class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.Si
     }
 
     // SignInListener callbacks
-    override fun onSignInSuccess() {
-        headerView.updateLoginState(true)
-        Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
+    override fun onSignInSuccess(user: JSONObject) {
+        headerView.updateLoginState(true, user.optString("userType").lowercase() == "custodian")
+        Toast.makeText(this, "Welcome, ${user.optString("firstName")}!", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onChangePasswordRequired(user: JSONObject) {
+        // Open change password modal
+        // You'll need to implement ChangePasswordModal
+        Toast.makeText(this, "Please change your password", Toast.LENGTH_SHORT).show()
     }
 
     override fun onSignUpClick() {
-        // Open Sign Up modal
         val signUpModal = SignUpModal()
         signUpModal.show(supportFragmentManager, SignUpModal.TAG)
     }
@@ -182,13 +200,11 @@ class HomePage : AppCompatActivity(), SignInModal.SignInListener, SignUpModal.Si
     // SignUpListener callbacks
     override fun onSignUpSuccess() {
         Toast.makeText(this, "Account created! Please sign in.", Toast.LENGTH_SHORT).show()
-        // Open Sign In modal
         val signInModal = SignInModal()
         signInModal.show(supportFragmentManager, SignInModal.TAG)
     }
 
     override fun onSignInClick() {
-        // Open Sign In modal
         val signInModal = SignInModal()
         signInModal.show(supportFragmentManager, SignInModal.TAG)
     }

@@ -2,13 +2,16 @@ package com.example.wildcatsden
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.wildcatsden.api.ApiService
+import org.json.JSONObject
 
 class SignUpModal : DialogFragment() {
 
@@ -28,6 +31,7 @@ class SignUpModal : DialogFragment() {
     private lateinit var btnCreateAccount: Button
     private lateinit var tvSignIn: TextView
     private lateinit var tvError: TextView
+    private lateinit var btnClose: TextView
 
     private var listener: SignUpListener? = null
 
@@ -72,6 +76,7 @@ class SignUpModal : DialogFragment() {
         btnCreateAccount = view.findViewById(R.id.btnCreateAccount)
         tvSignIn = view.findViewById(R.id.tvSignIn)
         tvError = view.findViewById(R.id.tvError)
+        btnClose = view.findViewById(R.id.btnClose)
     }
 
     private fun setupSpinner() {
@@ -120,6 +125,10 @@ class SignUpModal : DialogFragment() {
         tvSignIn.setOnClickListener {
             dismiss()
             listener?.onSignInClick()
+        }
+
+        btnClose.setOnClickListener {
+            dismiss()
         }
     }
 
@@ -214,19 +223,60 @@ class SignUpModal : DialogFragment() {
         btnCreateAccount.isEnabled = false
         btnCreateAccount.text = "Creating Account..."
 
-        // TODO: Replace with actual API call
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            Toast.makeText(context, "Account created successfully!", Toast.LENGTH_SHORT).show()
-            dismiss()
-            listener?.onSignUpSuccess()
-        }, 1500)
+        val selectedRole = spinnerUserType.selectedItem.toString()
+
+        // Match exactly what your backend expects
+        val userData = JSONObject().apply {
+            put("firstName", etFirstName.text.toString().trim())
+            put("lastName", etLastName.text.toString().trim())
+            put("email", etEmail.text.toString().trim())
+            put("password", etPassword.text.toString().trim())
+            put("userType", selectedRole)  // Send exactly as selected
+
+            when (selectedRole) {
+                "Student" -> {
+                    put("course", etCourse.text.toString().trim())
+                    put("organization", etOrganization.text.toString().trim())
+                }
+                "Coordinator" -> {
+                    put("affiliation", etAffiliation.text.toString().trim())
+                }
+                "Faculty" -> {
+                    put("department", etDepartment.text.toString().trim())
+                }
+                "Custodian" -> {
+                    put("department", etDepartment.text.toString().trim())
+                }
+            }
+        }
+
+        Log.d("SignUpModal", "Sending signup data: $userData")
+
+        ApiService.signUp(userData, object : ApiService.ApiCallback {
+            override fun onSuccess(response: Any?) {
+                Log.d("SignUpModal", "SignUp success: $response")
+                Handler(Looper.getMainLooper()).post {
+                    Toast.makeText(context, "Account created successfully!", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                    listener?.onSignUpSuccess()
+                }
+            }
+
+            override fun onError(error: String) {
+                Log.e("SignUpModal", "SignUp error: $error")
+                Handler(Looper.getMainLooper()).post {
+                    showError(error)
+                    resetButton()
+                }
+            }
+        })
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        listener?.onModalDismiss()
+    private fun resetButton() {
+        btnCreateAccount.isEnabled = true
+        btnCreateAccount.text = "Create Account"
     }
-
+//    TO LOG WHO IS DOING WHAT
     companion object {
         const val TAG = "SignUpModal"
     }

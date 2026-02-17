@@ -2,18 +2,20 @@ package com.example.wildcatsden
 
 import android.app.Dialog
 import android.content.Context
-import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.example.wildcatsden.api.ApiService
+import com.example.wildcatsden.api.UserSession
+import org.json.JSONObject
 
 class SignInModal : DialogFragment() {
 
@@ -22,13 +24,15 @@ class SignInModal : DialogFragment() {
     private lateinit var btnContinue: Button
     private lateinit var tvSignUp: TextView
     private lateinit var tvError: TextView
+    private lateinit var btnClose: TextView
 
     private var listener: SignInListener? = null
 
     interface SignInListener {
-        fun onSignInSuccess()
+        fun onSignInSuccess(user: JSONObject)
         fun onSignUpClick()
         fun onModalDismiss()
+        fun onChangePasswordRequired(user: JSONObject)
     }
 
     override fun onAttach(context: Context) {
@@ -54,6 +58,7 @@ class SignInModal : DialogFragment() {
         btnContinue = view.findViewById(R.id.btnContinue)
         tvSignUp = view.findViewById(R.id.tvSignUp)
         tvError = view.findViewById(R.id.tvError)
+        btnClose = view.findViewById(R.id.btnClose)
     }
 
     private fun setupClickListeners() {
@@ -69,6 +74,10 @@ class SignInModal : DialogFragment() {
         tvSignUp.setOnClickListener {
             dismiss()
             listener?.onSignUpClick()
+        }
+
+        btnClose.setOnClickListener {
+            dismiss()
         }
     }
 
@@ -88,10 +97,6 @@ class SignInModal : DialogFragment() {
                 showError("Password is required")
                 return false
             }
-            password.length < 8 -> {
-                showError("Password must be at least 8 characters")
-                return false
-            }
         }
         return true
     }
@@ -102,29 +107,71 @@ class SignInModal : DialogFragment() {
     }
 
     private fun performSignIn(email: String, password: String) {
-        // TODO: Replace with actual API call
-        // This is mock implementation
+        Log.d("SignInModal", "=== PERFORM SIGN IN ===")
+        Log.d("SignInModal", "Email: $email")
+
         btnContinue.isEnabled = false
         btnContinue.text = "Signing In..."
 
-        // Simulate API call
-        android.os.Handler(Looper.getMainLooper()).postDelayed({
-            // Mock successful login
-            if (email.contains("@") && password.length >= 8) {
-                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                dismiss()
-                listener?.onSignInSuccess()
-            } else {
-                showError("Invalid email or password")
-                btnContinue.isEnabled = true
-                btnContinue.text = "Continue"
+        // Use the correct signIn method that takes email and password strings
+        ApiService.signIn(email, password, object : ApiService.ApiCallback {
+            override fun onSuccess(response: Any?) {
+                Log.d("SignInModal", "SignIn success: $response")
+                Handler(Looper.getMainLooper()).post {
+                    try {
+                        when (response) {
+                            is JSONObject -> {
+                                val token = response.optString("token")
+                                val userJson = response.optJSONObject("user")
+
+                                if (userJson != null) {
+                                    // Save session
+                                    if (token.isNotEmpty()) {
+                                        UserSession.saveAuthToken(token)
+                                    }
+                                    UserSession.saveUser(userJson)
+
+                                    // Check if first login
+                                    if (userJson.optBoolean("firstLogin", false)) {
+                                        Toast.makeText(context, "You must change your password", Toast.LENGTH_SHORT).show()
+                                        dismiss()
+                                        listener?.onChangePasswordRequired(userJson)
+                                    } else {
+                                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                                        dismiss()
+                                        listener?.onSignInSuccess(userJson)
+                                    }
+                                } else {
+                                    showError("Invalid response: no user data")
+                                    resetButton()
+                                }
+                            }
+                            else -> {
+                                showError("Unexpected response type")
+                                resetButton()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e("SignInModal", "Error parsing response", e)
+                        showError("Error parsing response: ${e.message}")
+                        resetButton()
+                    }
+                }
             }
-        }, 1500)
+
+            override fun onError(error: String) {
+                Log.e("SignInModal", "SignIn error: $error")
+                Handler(Looper.getMainLooper()).post {
+                    showError(error)
+                    resetButton()
+                }
+            }
+        })
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        listener?.onModalDismiss()
+    private fun resetButton() {
+        btnContinue.isEnabled = true
+        btnContinue.text = "Continue"
     }
 
     companion object {
